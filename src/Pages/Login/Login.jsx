@@ -1,6 +1,7 @@
 import React, { useState,useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Storecontext } from "../../Contexts/Storecontext";
+import { toast } from "react-toastify";
 import axios from "axios";
 
 const Login = () => {
@@ -22,27 +23,28 @@ const Login = () => {
     // Example validation
     if (name && password && contact) {
       try {
-        // Perform login logic
-        alert("Login Attempted!");
+        
         const res = await axios.post(url, { name, contact, password });
 
         if (res.status === 200) {
 
           if (res.data.success) {
+            toast.success(" Login Success")
             setToken(res.data.token)
             navigate('/admin');
             
           } else {
-            console.log("login failed");
+           toast.success("Login failed")
           }
         } else {
-          alert("Login Failed. Please try again.");
+          toast.error("Login failed, Please try again")
         }
       } catch (error) {
+        toast.error("error during login")
         console.error("Error during login:", error);
       }
     } else {
-      alert("Please fill in all required fields");
+      toast.error("Please fill all fields")
     }
   };
 
