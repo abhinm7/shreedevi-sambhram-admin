@@ -17,11 +17,9 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Example validation
     if (name && password && contact) {
-      // Show the loading toast
       const loadingToast = toast.loading("Loading... Please wait.");
-    
+      
       try {
         const res = await axios.post(url, { name, contact, password });
     
@@ -33,7 +31,7 @@ const Login = () => {
               isLoading: false,
               autoClose: 3000,
             });
-            
+    
             setToken(res.data.token);
             navigate("/admin");
           } else {
@@ -54,9 +52,9 @@ const Login = () => {
         }
       } catch (error) {
         console.error("Error during login:", error);
-        
+        const errorMessage = error.response?.data?.message || "Error in login";
         toast.update(loadingToast, {
-          render: "Please check your credentials",
+          render: errorMessage,
           type: "error",
           isLoading: false,
           autoClose: 3000,
@@ -65,6 +63,7 @@ const Login = () => {
     } else {
       toast.error("Please fill all fields");
     }
+    
     
   };
 
