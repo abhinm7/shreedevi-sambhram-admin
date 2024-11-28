@@ -56,7 +56,7 @@ const Login = () => {
         console.error("Error during login:", error);
         
         toast.update(loadingToast, {
-          render: "Error during login",
+          render: "Please check your credentials",
           type: "error",
           isLoading: false,
           autoClose: 3000,
