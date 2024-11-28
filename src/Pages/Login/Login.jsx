@@ -28,13 +28,11 @@ const Login = () => {
         if (res.status === 200) {
           if (res.data.success) {
             toast.update(loadingToast, {
-              render: "Operation Successful",
+              render: "Login Successful",
               type: "success",
               isLoading: false,
               autoClose: 3000,
             });
-    
-            toast.success("Login Success");
             
             setToken(res.data.token);
             navigate("/admin");
