@@ -1,51 +1,73 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Storecontext } from "../../Contexts/Storecontext";
 import { toast } from "react-toastify";
 import axios from "axios";
 
 const Login = () => {
-
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [contact, setContact] = useState("");
-  const {token,setToken}= useContext(Storecontext);
+  const { token, setToken } = useContext(Storecontext);
 
   const navigate = useNavigate();
 
-  const url =
-    `${import.meta.env.VITE_API_URL}/api/admin/admin-login`;
+  const url = `${import.meta.env.VITE_API_URL}/api/admin/admin-login`;
 
- 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Example validation
     if (name && password && contact) {
+      // Show the loading toast
+      const loadingToast = toast.loading("Loading... Please wait.");
+    
       try {
-        
         const res = await axios.post(url, { name, contact, password });
-
+    
         if (res.status === 200) {
-
           if (res.data.success) {
-            toast.success(" Login Success")
-            setToken(res.data.token)
-            navigate('/admin');
+            toast.update(loadingToast, {
+              render: "Operation Successful",
+              type: "success",
+              isLoading: false,
+              autoClose: 3000,
+            });
+    
+            toast.success("Login Success");
             
+            setToken(res.data.token);
+            navigate("/admin");
           } else {
-           toast.success("Login failed")
+            toast.update(loadingToast, {
+              render: "Login failed",
+              type: "error",
+              isLoading: false,
+              autoClose: 3000,
+            });
           }
         } else {
-          toast.error("Login failed, Please try again")
+          toast.update(loadingToast, {
+            render: "Login failed, Please try again",
+            type: "error",
+            isLoading: false,
+            autoClose: 3000,
+          });
         }
       } catch (error) {
-        toast.error("error during login")
         console.error("Error during login:", error);
+        
+        toast.update(loadingToast, {
+          render: "Error during login",
+          type: "error",
+          isLoading: false,
+          autoClose: 3000,
+        });
       }
     } else {
-      toast.error("Please fill all fields")
+      toast.error("Please fill all fields");
     }
+    
   };
 
   return (
