@@ -13,7 +13,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const url =
-    `${import.meta.env.VITE_API_UR}/api/admin/admin-login`;
+    `${import.meta.env.VITE_API_URL}/api/admin/admin-login`;
 
  
   const handleSubmit = async (e) => {
