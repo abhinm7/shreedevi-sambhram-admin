@@ -15,6 +15,9 @@ const Dashboard = () => {
         <div className="dashboard-card" onClick={()=>setView('overview')}>Overview</div>
         <div className="dashboard-card" onClick={()=>setView('all')}>Registered Participants</div>
         <div className="dashboard-card" onClick={()=>setView('events')}>All Events</div>
+        <div className="dashboard-card" onClick={()=>setView('Technical')}>Technical Events</div>
+        <div className="dashboard-card" onClick={()=>setView('Cultural')}>Cultural Events</div>
+        <div className="dashboard-card" onClick={()=>setView('Special')}>Special Events</div>
       </div>
     </>
   );

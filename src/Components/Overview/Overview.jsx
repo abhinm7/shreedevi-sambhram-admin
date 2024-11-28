@@ -43,7 +43,7 @@ const Overview = ({ partData }) => {
               cx="50%"
               cy="50%"
               outerRadius={100}
-              fill="#8884d8"
+              fill="#8884d9"
               label
             />
             <Tooltip />

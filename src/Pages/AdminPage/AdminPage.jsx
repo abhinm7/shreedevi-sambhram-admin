@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Storecontext } from "../../Contexts/Storecontext";
 import Dashboard from "../../Components/Dashboard/Dashboard";
 import EventTable from "../../Components/EvetTable/EventTable";
+import EventType from "../../Components/EventType/EventType";
 import ParticipantTable from "../../Components/ParticipantTable/ParticipantTable";
 import axios from "axios";
 import DataTable from "datatables.net-react";
@@ -17,14 +18,21 @@ const AdminPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const participantsUrl =
-  `${import.meta.env.VITE_API_URL}/api/admin/participants`;
-  const eventsUrl =
-    `${import.meta.env.VITE_API_URL}/api/v1/auth/events`;
+  const participantsUrl = `${
+    import.meta.env.VITE_API_URL
+  }/api/admin/participants`;
+  const eventsUrl = `${import.meta.env.VITE_API_URL}/api/v1/auth/events`;
 
-  const { currentView, token,showEvent,showParticipants,setShowParticipants,handleEventTable,handleShowParticipants } = useContext(Storecontext);
-  
-   
+  const {
+    currentView,
+    token,
+    showEvent,
+    showParticipants,
+    setShowParticipants,
+    handleEventTable,
+    handleShowParticipants,
+  } = useContext(Storecontext);
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -74,9 +82,7 @@ const AdminPage = () => {
     setShowParticipants(participantsForEvent);
   };
 
-  useEffect(()=>{
-    
-  },[showParticipants])
+  useEffect(() => {}, [showParticipants]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -90,9 +96,7 @@ const AdminPage = () => {
     <div className="admin">
       <Dashboard />
       <div className="admin-view">
-        {currentView === "overview" && (
-          <Overview partData={tableData} />
-        )}
+        {currentView === "overview" && <Overview partData={tableData} />}
 
         {currentView === "all" && (
           <DataTable className="display">
@@ -157,13 +161,41 @@ const AdminPage = () => {
           </DataTable>
         )}
 
-        {
-          showParticipants&&(
-            <div className="event-table">
-            <ParticipantTable pdata={showParticipants} partStatus={handleShowParticipants} />
+        {currentView === "Technical" && (
+          <EventType
+            data={eventsData}
+            getParticipants={getEventParticipants}
+            eventRegistrationCounts={eventRegistrationCounts}
+            eventype={currentView}
+          />
+        )}
+
+        {currentView === "Cultural" && (
+          <EventType
+            data={eventsData}
+            getParticipants={getEventParticipants}
+            eventRegistrationCounts={eventRegistrationCounts}
+            eventype={currentView}
+          />
+        )}
+
+        {currentView === "Special" && (
+          <EventType
+            data={eventsData}
+            getParticipants={getEventParticipants}
+            eventRegistrationCounts={eventRegistrationCounts}
+            eventype={currentView}
+          />
+        )}
+
+        {showParticipants && (
+          <div className="event-table">
+            <ParticipantTable
+              pdata={showParticipants}
+              partStatus={handleShowParticipants}
+            />
           </div>
-          )
-        }
+        )}
 
         {showEvent && (
           <div className="event-table">
