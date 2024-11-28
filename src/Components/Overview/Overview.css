@@ -1,0 +1,29 @@
+.overview{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+    width: 80%; 
+}
+
+.pie-chart{
+    width: 300px;
+}
+.total-registration{
+    height: 100px;
+    width: 200px;  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    border: 3px solid rgb(0, 0, 84);
+    border-radius: 15px;
+}
+.total-registration h1{
+    font-size: 15px;
+}
+.total-registration p{
+    font-size: 30px;
+    font-weight: bold;
+    color: rgb(0, 0, 84);
+}

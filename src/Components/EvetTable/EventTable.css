@@ -1,0 +1,16 @@
+.close{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    padding: 10px;
+}
+
+
+.event-table{
+    position: fixed;
+    top: 9%;
+    width: 70vw;
+    height: 90vh;
+    background-color: rgb(255, 255, 255);
+    overflow: scroll;
+}
