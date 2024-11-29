@@ -23,3 +23,8 @@
 .dashboard-card:hover{
     transform: scale(1.01);
 }
+@media(max-height:720px){
+    .dashboard{
+        display: none;
+    }
+}
