@@ -56,6 +56,9 @@ const Overview = ({ partData }) => {
             <p>{successfulParticipants.length}</p>
           </div>
         </div>
+        <div className="mobile-warning">
+          <p>Please switch to pc for accessing all details</p>
+        </div>
       </div>
     </>
   );

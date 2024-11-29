@@ -10,3 +10,12 @@
     overflow: scroll;
     background-color: rgb(255, 255, 255);
 }
+@media (max-width:720px) {
+    .admin{
+        display: flex;
+        flex-direction: row;
+    }
+    .admin-view{
+        width: 100%;
+    }
+}
