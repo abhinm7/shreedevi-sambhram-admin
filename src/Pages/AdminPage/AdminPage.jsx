@@ -4,7 +4,6 @@ import Dashboard from "../../Components/Dashboard/Dashboard";
 import EventTable from "../../Components/EvetTable/EventTable";
 import EventType from "../../Components/EventType/EventType";
 import ParticipantTable from "../../Components/ParticipantTable/ParticipantTable";
-import axios from "axios";
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-dt";
 import "./AdminPage.css";
@@ -13,54 +12,18 @@ import Overview from "../../Components/Overview/Overview";
 DataTable.use(DT);
 
 const AdminPage = () => {
-  const [tableData, setTableData] = useState([]);
-  const [eventsData, setEventsData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const participantsUrl = `${
-    import.meta.env.VITE_API_URL
-  }/api/admin/participants`;
-  const eventsUrl = `${import.meta.env.VITE_API_URL}/api/v1/auth/events`;
-
   const {
     currentView,
-    token,
     showEvent,
     showParticipants,
     setShowParticipants,
     handleEventTable,
     handleShowParticipants,
+    tableData,
+    eventsData,
+    isLoading,
+    error,
   } = useContext(Storecontext);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const [participantsRes, eventsRes] = await Promise.all([
-          axios.get(participantsUrl, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }),
-          axios.get(eventsUrl),
-        ]);
-
-        setTableData(participantsRes.data.participants || []);
-        setEventsData(eventsRes.data || []);
-      } catch (err) {
-        console.error("Error fetching data", err);
-        setError(err.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    if (token) {
-      fetchData();
-    }
-  }, [token]);
 
   const eventRegistrationCounts = tableData.reduce((acc, participant) => {
     participant.registrations.forEach((reg) => {
@@ -72,7 +35,6 @@ const AdminPage = () => {
   }, {});
 
   const getEventParticipants = (eventId) => {
-    // Filter participants who have a valid registration for the event with 'paid' status
     const participantsForEvent = tableData.filter((participant) =>
       participant.registrations.some(
         (reg) => reg.event_id === eventId && reg.payment_status === "paid"

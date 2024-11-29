@@ -20,6 +20,10 @@
     font-size: 14px;
     background-color: rgba(138, 138, 138, 0.274);
 }
+.active{
+    background-color: rgba(138, 138, 138, 0.5);
+    font-size: 15px;
+}
 .dashboard-card:hover{
     transform: scale(1.01);
 }
