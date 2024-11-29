@@ -21,6 +21,7 @@ const AdminPage = () => {
     handleShowParticipants,
     tableData,
     eventsData,
+    successfulParticipants,
     isLoading,
     error,
   } = useContext(Storecontext);

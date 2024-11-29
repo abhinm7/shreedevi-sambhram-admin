@@ -4,6 +4,7 @@ import axios from 'axios'
 export const Storecontext = createContext();
 
 export const ContextProvider = ({ children }) => {
+  
   const [currentView, setCurrentView] = useState("overview");
   const [token, setToken] = useState(localStorage.getItem("token") || "");
 
@@ -26,18 +27,32 @@ export const ContextProvider = ({ children }) => {
     const fetchData = async () => {
       setIsLoading(true);
       setError(null);
+  
       try {
-        const [participantsRes, eventsRes] = await Promise.all([
-          axios.get(participantsUrl, {
+        let allParticipants = [];
+        let currentPage = 1;
+        let hasMore = true;
+  
+        // Fetch participants data with pagination
+        while (hasMore) {
+          const participantsRes = await axios.get(`${participantsUrl}?page=${currentPage}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          }),
-          axios.get(eventsUrl),
-        ]);
-
-        setTableData(participantsRes.data.participants || []);
+          });
+          const { participants, pagination } = participantsRes.data;
+  
+          allParticipants = [...allParticipants, ...participants];
+          hasMore = pagination.hasMore;
+          currentPage++;
+        }
+  
+        // Fetch events data
+        const eventsRes = await axios.get(eventsUrl);
+        
+        setTableData(allParticipants); // Set all participants
         setEventsData(eventsRes.data || []);
+        
       } catch (err) {
         console.error("Error fetching data", err);
         setError(err.message);
@@ -45,11 +60,12 @@ export const ContextProvider = ({ children }) => {
         setIsLoading(false);
       }
     };
-
+  
     if (token) {
       fetchData();
     }
   }, [token]);
+  
 
   useEffect(() => {
     if (token) {

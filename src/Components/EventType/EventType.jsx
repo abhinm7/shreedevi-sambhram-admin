@@ -24,7 +24,7 @@
                 <th>Student Coordinator</th>
                 <th>Coordinator Contact</th>
                 <th>Registrations</th>
-                <th>View Details</th>
+                <th>View Details</th> 
                 </tr>
             </thead>
             <tbody>

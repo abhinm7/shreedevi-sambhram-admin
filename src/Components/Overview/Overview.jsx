@@ -5,7 +5,7 @@ import { Storecontext } from "../../Contexts/Storecontext";
 import "./Overview.css";
 
 const Overview = ({ partData }) => {
-  const { successfulParticipants, NonsuccessfulParticipants,eventsData } =
+  const { successfulParticipants, NonsuccessfulParticipants,eventsData,tableData } =
     useContext(Storecontext);
 
   const pieData = Object.values(
@@ -64,8 +64,6 @@ const chartData = Object.keys(pieDataEvent).map(eventId => {
   };
 });
 
-console.log(chartData);
-
 
 
   return (
@@ -102,6 +100,7 @@ console.log(chartData);
               <Tooltip />
             </PieChart>
           </div>
+          
           {/* <div className="pie-chart">
             <PieChart width={300} height={300}>
               <Pie
