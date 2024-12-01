@@ -45,6 +45,13 @@ const AdminPage = () => {
     setShowParticipants(participantsForEvent);
   };
 
+  const filteredTableData = tableData.filter(item => 
+    item.registrations.some(registration => registration.payment_status === "paid")
+);
+
+  console.log("new",successfulParticipants);
+  
+
   useEffect(() => {}, [showParticipants]);
 
   if (isLoading) {
@@ -73,7 +80,7 @@ const AdminPage = () => {
               </tr>
             </thead>
             <tbody>
-              {tableData.map((row, index) => (
+              {successfulParticipants.map((row, index) => (
                 <tr key={row._id || index}>
                   <td>{row.name}</td>
                   <td>{row.phone}</td>
