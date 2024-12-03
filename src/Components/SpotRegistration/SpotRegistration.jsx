@@ -159,8 +159,6 @@ const SpotRegistration = () => {
       phone: data.mobile,
       registrations: updatedRegistrations,
     };
-
-    console.log("data",dataToSend);
     
 
     axios
@@ -176,6 +174,7 @@ const SpotRegistration = () => {
             mobile: "",
             Othercollege: "",
           });
+          setSelectedEvent([])
         }
       })
       .catch((error) => {
