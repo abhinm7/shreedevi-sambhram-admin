@@ -92,7 +92,7 @@ const SpotRegistration = () => {
   ];
   const { eventsData, token } = useContext(Storecontext);
   const [selectedEvent, setSelectedEvent] = useState([]);
-  const [viewTable, setViewTable] = useState(true);
+  const [viewTable, setViewTable] = useState(false);
   const handleTableView = () => {
     setViewTable(!viewTable);
   };
