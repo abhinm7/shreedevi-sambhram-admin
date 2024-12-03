@@ -87,8 +87,7 @@ export const ContextProvider = ({ children }) => {
 
   const handleEventTable = (registrations) => {
     setShowEvent(registrations || false);
-      
-    console.log(registrations)
+
   };
 
   const handleShowParticipants = () => {

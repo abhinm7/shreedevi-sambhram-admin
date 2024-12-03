@@ -1,13 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Storecontext } from "../../Contexts/Storecontext";
+
 import Dashboard from "../../Components/Dashboard/Dashboard";
 import EventTable from "../../Components/EvetTable/EventTable";
 import EventType from "../../Components/EventType/EventType";
+import SpotRegistration from "../../Components/SpotRegistration/SpotRegistration";
 import ParticipantTable from "../../Components/ParticipantTable/ParticipantTable";
+import Overview from "../../Components/Overview/Overview";
+
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-dt";
+
 import "./AdminPage.css";
-import Overview from "../../Components/Overview/Overview";
 
 DataTable.use(DT);
 
@@ -48,8 +52,6 @@ const AdminPage = () => {
   const filteredTableData = tableData.filter(item => 
     item.registrations.some(registration => registration.payment_status === "paid")
 );
-
-  console.log("new",successfulParticipants);
   
 
   useEffect(() => {}, [showParticipants]);
@@ -122,7 +124,7 @@ const AdminPage = () => {
                       onClick={() => getEventParticipants(event._id)}
                       className="store-btn"
                     >
-                      View participants
+                      View participants 
                     </button>
                   </td>
                 </tr>
@@ -156,6 +158,10 @@ const AdminPage = () => {
             eventRegistrationCounts={eventRegistrationCounts}
             eventype={currentView}
           />
+        )}
+         {currentView === "spot" && (
+
+          <SpotRegistration/>
         )}
 
         {showParticipants && (

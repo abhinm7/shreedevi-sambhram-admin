@@ -57,6 +57,13 @@ const Dashboard = () => {
         >
           Special Events
         </div>
+
+        <div 
+          className={`dashboard-card ${activeView === 'spot' ? 'active' : ''}`} 
+          onClick={() => setView('spot')}
+        >
+          Spot Registration
+        </div>
       </div>
     </>
   );
