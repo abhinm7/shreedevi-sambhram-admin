@@ -93,6 +93,8 @@
 
 .event-register-btn:hover {
     transform: scale(1.01);
+    font-size: 17px;
+    background-color: rgb(26, 1, 84);
 }
 
 .selected-events {
