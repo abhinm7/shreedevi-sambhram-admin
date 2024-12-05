@@ -22,7 +22,8 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.0.1",
     "react-toastify": "^10.0.6",
-    "recharts": "^2.13.3"
+    "recharts": "^2.13.3",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

@@ -4,29 +4,9 @@ import { Storecontext } from "../../Contexts/Storecontext";
 
 import "./Overview.css";
 
-const Overview = ({ partData }) => {
-  const { successfulParticipants, NonsuccessfulParticipants,eventsData,tableData } =
+const Overview = ({ partData,collegecount }) => {
+  const { successfulParticipants, NonsuccessfulParticipants,eventsData } =
     useContext(Storecontext);
-
-  const pieData = Object.values(
-    partData.reduce((acc, curr) => {
-      // Filter registrations for 'paid' status
-      const hasPaidRegistration = curr.registrations.some(
-        (reg) => reg.payment_status === "paid"
-      );
-
-      if (hasPaidRegistration) {
-        const college = curr.college;
-        if (acc[college]) {
-          acc[college].value += 1;
-        } else {
-          acc[college] = { name: college, value: 1 };
-        }
-      }
-
-      return acc;
-    }, {})
-  );
 
   const totalSuccessfulRegistrations = partData.reduce((total, participant) => {
     const successfulRegs = participant.registrations.filter(
@@ -42,6 +22,8 @@ const Overview = ({ partData }) => {
     return total + successfulRegs.length;
   }, 0);
 
+
+
   const pieDataEvent = partData
   .flatMap(participant => 
     participant.registrations
@@ -54,6 +36,8 @@ const Overview = ({ partData }) => {
     return acc;
   }, {});
 
+  
+
 // Convert to pieData format for PieChart with event name instead of _id
 const chartData = Object.keys(pieDataEvent).map(eventId => {
   // Find the corresponding event name from eventsData using _id
@@ -64,8 +48,6 @@ const chartData = Object.keys(pieDataEvent).map(eventId => {
   };
 });
 
-
-
   return (
     <>
       <div className="overview">
@@ -73,7 +55,7 @@ const chartData = Object.keys(pieDataEvent).map(eventId => {
           <div className="pie-chart">
             <PieChart width={300} height={300}>
               <Pie
-                data={pieData}
+                data={collegecount}
                 dataKey="value"
                 nameKey="name"
                 cx="50%"
@@ -101,21 +83,6 @@ const chartData = Object.keys(pieDataEvent).map(eventId => {
             </PieChart>
           </div>
           
-          {/* <div className="pie-chart">
-            <PieChart width={300} height={300}>
-              <Pie
-                data={pieData}
-                dataKey="value"
-                nameKey="name"
-                cx="50%"
-                cy="50%"
-                outerRadius={100}
-                fill="#8884d9"
-                label
-              />
-              <Tooltip />
-            </PieChart>
-          </div> */}
 
         </div>
         <div className="overview-down">
@@ -129,7 +96,7 @@ const chartData = Object.keys(pieDataEvent).map(eventId => {
           </div>
           <div className="total-registration">
             <h1>Total Colleges</h1>
-            <p>{pieData.length}</p>
+            <p>{collegecount.length}</p>
           </div>
         </div>
       

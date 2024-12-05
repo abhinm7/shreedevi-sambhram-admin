@@ -10,6 +10,15 @@
     overflow: scroll;
     background-color: rgb(255, 255, 255);
 }
+.td-center{
+    text-align: center;
+}
+.btn-container{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: end;
+}
 @media (max-width:720px) {
     .admin{
         display: flex;
