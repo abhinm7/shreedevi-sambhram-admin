@@ -59,7 +59,7 @@ const EventType = ({
               <tr key={event.event_id}>
                 <td>{event.eventName}</td>
                 <td>{event.eventSubName}</td>
-                <td className="td-center">{event.studentCoordinator}</td>
+                <td>{event.studentCoordinator}</td>
                 <td className="td-center">{event.studentCoordinatorContact}</td>
                 <td className="td-center">
                   {eventRegistrationCounts[event._id] || 0}
