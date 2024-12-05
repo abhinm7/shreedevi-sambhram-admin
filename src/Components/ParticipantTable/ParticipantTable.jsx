@@ -3,11 +3,10 @@ import './ParticipantTable.css'
 import React from 'react'
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-dt";
-import axios from "axios";
 DataTable.use(DT);
 
 const ParticipantTable = ({pdata,partStatus}) => {
-
+ 
     
   return (
     <div>

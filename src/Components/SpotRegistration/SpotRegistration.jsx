@@ -159,28 +159,30 @@ const SpotRegistration = () => {
       phone: data.mobile,
       registrations: updatedRegistrations,
     };
+
+    toast.error("unavailable")
     
 
-    axios
-      .post(url, dataToSend, { headers })
-      .then((response) => {
-        console.log("Response:", response.data);
-        if (response.data.success) {
-          toast.success("Registered Succesfully");
-          setData({
-            name: "",
-            usn: "",
-            college: "",
-            mobile: "",
-            Othercollege: "",
-          });
-          setSelectedEvent([])
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        toast.error(error.response.data.message)
-      });
+    // axios
+    //   .post(url, dataToSend, { headers })
+    //   .then((response) => {
+    //     console.log("Response:", response.data);
+    //     if (response.data.success) {
+    //       toast.success("Registered Succesfully");
+    //       setData({
+    //         name: "",
+    //         usn: "",
+    //         college: "",
+    //         mobile: "",
+    //         Othercollege: "",
+    //       });
+    //       setSelectedEvent([])
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //     toast.error(error.response.data.message)
+    //   });
   };
 
   return (
@@ -294,6 +296,9 @@ const SpotRegistration = () => {
         </div>
       </div>
 
+      <div className="unavailable">
+        currently unavailable &nbsp; <i className="fa-solid fa-exclamation fa-xl" style={{ color: "#ff0000" }}></i>
+      </div>
       {viewTable && (
         <div className="event-select">
           <div className="event-select-head">

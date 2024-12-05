@@ -27,6 +27,9 @@
 .dashboard-card:hover{
     transform: scale(1.01);
 }
+.spot{
+    background-color: red;
+}
 @media(max-width:720px){
     .dashboard{
         display: none;

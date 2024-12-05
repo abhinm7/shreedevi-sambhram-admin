@@ -81,17 +81,16 @@ const AdminPage = () => {
     return <div>Error: {error}</div>;
   }
 
-  const downloadXl = (jsonData,xlname) => {
+  const downloadXl = (jsonData, xlname) => {
     const worksheet = XLSX.utils.json_to_sheet(jsonData);
     const workbook = XLSX.utils.book_new();
 
     XLSX.utils.book_append_sheet(workbook, worksheet, "Data");
 
-
     XLSX.writeFile(workbook, `${xlname}.xlsx`);
   };
 
-  const exportToExcel = (eventdata,name) => {
+  const exportToExcel = (eventdata, name) => {
     // Prepare data for Excel
     const excelEvents = eventdata.map((event) => ({
       "Event Name": event.eventName,
@@ -106,7 +105,7 @@ const AdminPage = () => {
     XLSX.utils.book_append_sheet(workbook, worksheet, "Events");
 
     // Generate Excel file
-    XLSX.writeFile(workbook, name+'.xlsx');
+    XLSX.writeFile(workbook, name + ".xlsx");
   };
 
   return (
@@ -119,39 +118,43 @@ const AdminPage = () => {
 
         {currentView === "all" && (
           <>
-           <div className="btn-container">
-            <p>All Participants</p>
+            <div className="btn-container">
+              <p>All Participants</p>
               <i
-                onClick={() => downloadXl(successfulParticipants,"participants_list")}
+                onClick={() =>
+                  downloadXl(successfulParticipants, "participants_list")
+                }
                 className="fa-solid fa-download fa-xl"
               ></i>
             </div>
-          <DataTable className="display">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>College</th>
-                <th>No. of Events</th>
-                <th>Events</th>
-              </tr>
-            </thead>
-            <tbody>
-              {successfulParticipants.map((row, index) => (
-                <tr key={row._id || index}>
-                  <td>{row.name}</td>
-                  <td>{row.phone}</td>
-                  <td>{row.college}</td>
-                  <td className="td-center">{row.registrations.length}</td>
-                  <td className="td-center">
-                    <button onClick={() => handleEventTable(row.registrations)}>
-                      View Events
-                    </button>
-                  </td>
+            <DataTable className="display">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Phone</th>
+                  <th>College</th>
+                  <th>No. of Events</th>
+                  <th>Events</th>
                 </tr>
-              ))}
-            </tbody>
-          </DataTable>
+              </thead>
+              <tbody>
+                {successfulParticipants.map((row, index) => (
+                  <tr key={row._id || index}>
+                    <td>{row.name}</td>
+                    <td>{row.phone}</td>
+                    <td>{row.college}</td>
+                    <td className="td-center">{row.registrations.length}</td>
+                    <td className="td-center">
+                      <button
+                        onClick={() => handleEventTable(row.registrations)}
+                      >
+                        View Events
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </DataTable>
           </>
         )}
 
@@ -160,7 +163,7 @@ const AdminPage = () => {
             <div className="btn-container">
               <p>All Events</p>
               <i
-                onClick={() => exportToExcel(eventsData,"event-details")}
+                onClick={() => exportToExcel(eventsData, "event-details")}
                 className="fa-solid fa-download fa-xl"
               ></i>
             </div>
@@ -207,7 +210,7 @@ const AdminPage = () => {
             <div className="btn-container">
               <p>College List</p>
               <i
-                onClick={() => downloadXl(pieData,"college_list")}
+                onClick={() => downloadXl(pieData, "college_list")}
                 className="fa-solid fa-download fa-xl"
               ></i>
             </div>
@@ -226,8 +229,10 @@ const AdminPage = () => {
                     <td className="td-center">{college.value}</td>
 
                     <td className="td-center">
-                      View participants &nbsp;
-                      <i className="fa-solid fa-circle-info"></i>
+                      <button onClick={viewCollegeRegs}>
+                        &nbsp;
+                        <i className="fa-solid fa-circle-info"></i>
+                      </button>
                     </td>
                   </tr>
                 ))}

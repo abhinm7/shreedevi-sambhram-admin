@@ -30,14 +30,7 @@ const Dashboard = () => {
         >
           Overview
         </div>
-        <div
-            className={`dashboard-card ${
-              activeView === "college" ? "active" : ""
-            }`}
-            onClick={() => setView("college")}
-          >
-            College list
-          </div>
+      
         <div
           className={`dashboard-card ${activeView === "all" ? "active" : ""}`}
           onClick={() => setView("all")}
@@ -78,10 +71,19 @@ const Dashboard = () => {
         </div>
 
         <div
-          className={`dashboard-card ${activeView === "spot" ? "active" : ""}`}
+            className={`dashboard-card ${
+              activeView === "college" ? "active" : ""
+            }`}
+            onClick={() => setView("college")}
+          >
+            College List
+          </div>
+
+        <div
+          className={`dashboard-card ${activeView === "spot" ? "spot" : ""}`}
           onClick={() => setView("spot")}
         >
-          Spot Registration
+          Spot Registration 
         </div>
       </div>
     </>
