@@ -48,14 +48,11 @@ const AdminPage = () => {
         (reg) => reg.event_id === eventId && reg.payment_status === "paid"
       )
     );
-
+    
     const event = eventsData.find((e) => e._id === eventId);
-  
     const eventName = event.eventName;
 
     console.log(participantsForEvent);
-    
-
     setShowParticipants({data:participantsForEvent,name:eventName});
   };
 
