@@ -91,9 +91,9 @@ const AdminPage = () => {
     XLSX.writeFile(workbook, `${xlname}.xlsx`);
   };
 
-  const exportToExcel = () => {
+  const exportToExcel = (eventdata,name) => {
     // Prepare data for Excel
-    const excelEvents = eventsData.map((event) => ({
+    const excelEvents = eventdata.map((event) => ({
       "Event Name": event.eventName,
       "Event Sub Name": event.eventSubName,
       "Student Coordinator": event.studentCoordinator,
@@ -106,7 +106,7 @@ const AdminPage = () => {
     XLSX.utils.book_append_sheet(workbook, worksheet, "Events");
 
     // Generate Excel file
-    XLSX.writeFile(workbook, "EventDetails.xlsx");
+    XLSX.writeFile(workbook, name+'.xlsx');
   };
 
   return (
@@ -120,6 +120,7 @@ const AdminPage = () => {
         {currentView === "all" && (
           <>
            <div className="btn-container">
+            <p>All Participants</p>
               <i
                 onClick={() => downloadXl(successfulParticipants,"participants_list")}
                 className="fa-solid fa-download fa-xl"
@@ -157,8 +158,9 @@ const AdminPage = () => {
         {currentView === "events" && (
           <>
             <div className="btn-container">
+              <p>All Events</p>
               <i
-                onClick={() => downloadXl(eventsData,"events-list")}
+                onClick={() => exportToExcel(eventsData,"event-details")}
                 className="fa-solid fa-download fa-xl"
               ></i>
             </div>
@@ -203,6 +205,7 @@ const AdminPage = () => {
         {currentView === "college" && (
           <>
             <div className="btn-container">
+              <p>College List</p>
               <i
                 onClick={() => downloadXl(pieData,"college_list")}
                 className="fa-solid fa-download fa-xl"
