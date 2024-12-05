@@ -8,7 +8,10 @@
 
 .event-table{
     position: fixed;
+    display: flex;
+    flex-direction: column;
     top: 9%;
+    padding: 10px;
     width: 75%;
     height: 90vh;
     background-color: rgb(255, 255, 255);

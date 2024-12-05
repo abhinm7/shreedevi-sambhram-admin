@@ -1,0 +1,9 @@
+.event-wise-participant-head{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 0 5px 3px rgba(0,0,0,0.1);
+    border-radius: 6px;
+}

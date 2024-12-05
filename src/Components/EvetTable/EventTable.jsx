@@ -50,6 +50,7 @@ const EventTable = ({ data, EventStatus }) => {
           </svg>
         </button>
       </div>
+      
       <DataTable className="display">
         <thead>
           <tr>

@@ -48,7 +48,7 @@ const AdminPage = () => {
       )
     );
 
-    setShowParticipants(participantsForEvent);
+    setShowParticipants({data:participantsForEvent,name:eventId});
   };
 
   const pieData = Object.values(
@@ -117,7 +117,7 @@ const AdminPage = () => {
           (reg) => reg.payment_status === "paid"
         )
     );
-    setShowParticipants(participantsForCollege)
+    setShowParticipants({data:participantsForCollege,name:college})
     
   }
 
@@ -286,8 +286,9 @@ const AdminPage = () => {
         {showParticipants && (
           <div className="event-table">
             <ParticipantTable
-              pdata={showParticipants}
+              pdata={showParticipants.data}
               partStatus={handleShowParticipants}
+              name={showParticipants.name}
             />
           </div>
         )}

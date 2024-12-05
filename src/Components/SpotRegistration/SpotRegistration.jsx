@@ -295,10 +295,6 @@ const SpotRegistration = () => {
           </button>
         </div>
       </div>
-
-      <div className="unavailable">
-        currently unavailable &nbsp; <i className="fa-solid fa-exclamation fa-xl" style={{ color: "#ff0000" }}></i>
-      </div>
       {viewTable && (
         <div className="event-select">
           <div className="event-select-head">
