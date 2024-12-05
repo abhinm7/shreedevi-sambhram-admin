@@ -108,6 +108,19 @@ const AdminPage = () => {
     XLSX.writeFile(workbook, name + ".xlsx");
   };
 
+  const viewCollegeRegs =(college)=>{
+   
+    const participantsForCollege = tableData.filter(
+      (participant) =>
+        participant.college === college &&
+        participant.registrations.some(
+          (reg) => reg.payment_status === "paid"
+        )
+    );
+    setShowParticipants(participantsForCollege)
+    
+  }
+
   return (
     <div className="admin">
       <Dashboard />
@@ -229,7 +242,7 @@ const AdminPage = () => {
                     <td className="td-center">{college.value}</td>
 
                     <td className="td-center">
-                      <button onClick={viewCollegeRegs}>
+                      <button onClick={()=>viewCollegeRegs(college.name)}>
                         &nbsp;
                         <i className="fa-solid fa-circle-info"></i>
                       </button>
