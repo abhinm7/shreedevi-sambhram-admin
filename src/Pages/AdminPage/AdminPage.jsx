@@ -42,13 +42,21 @@ const AdminPage = () => {
   }, {});
 
   const getEventParticipants = (eventId) => {
+
     const participantsForEvent = tableData.filter((participant) =>
       participant.registrations.some(
         (reg) => reg.event_id === eventId && reg.payment_status === "paid"
       )
     );
 
-    setShowParticipants({data:participantsForEvent,name:eventId});
+    const event = eventsData.find((e) => e._id === eventId);
+  
+    const eventName = event.eventName;
+
+    console.log(participantsForEvent);
+    
+
+    setShowParticipants({data:participantsForEvent,name:eventName});
   };
 
   const pieData = Object.values(
@@ -70,8 +78,6 @@ const AdminPage = () => {
       return acc;
     }, {})
   );
-
-  useEffect(() => {}, [showParticipants]);
 
   if (isLoading) {
     return <div>Loading...</div>;
