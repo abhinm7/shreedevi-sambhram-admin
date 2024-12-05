@@ -1,6 +1,6 @@
 import React from "react";
 import "./EventType.css";
-
+import * as XLSX from "xlsx";
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-dt";
 DataTable.use(DT);
@@ -11,6 +11,7 @@ const EventType = ({
   eventRegistrationCounts,
   eventype,
 }) => {
+
   const exportXL = (eventdata, name) => {
     // Prepare data for Excel
     const excelEvents = eventdata.map((event) => ({
@@ -26,18 +27,18 @@ const EventType = ({
     XLSX.utils.book_append_sheet(workbook, worksheet, "Events");
 
     // Generate Excel file
-    XLSX.writeFile(workbook, name + ".xlsx");
+    XLSX.writeFile(workbook, name + "_event_details.xlsx");
   };
+
   const filterEvents = data.filter((event) => event.eventType === eventype);
-  console.log(filterEvents, eventype);
-  console.log(data);
+  
 
   return (
     <>
       <div className="btn-container">
         <p>{eventype} events list</p>
         <i
-          onClick={() => exportXL(eventsData)}
+          onClick={() => exportXL(filterEvents,eventype)}
           className="fa-solid fa-download fa-xl"
         ></i>
       </div>
